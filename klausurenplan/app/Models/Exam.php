@@ -9,7 +9,7 @@ class Exam extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'capacity'];
+    protected $fillable = ['date', 'start_time', 'end_time', 'exam_format_id', 'lecturer_id', 'course_id', 'room_id', 'semester_id', 'faculty_id', 'degree_id'];
 
     public function examFormat()
     {

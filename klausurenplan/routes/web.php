@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CsvUploadController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,12 @@ Route::get('/dashboard', function () {
 Route::get('/uploadcsv', function(){
     return view('uploadcsv');
 });
+
+Route::get('/upload-csv', function () {
+    return view('upload');
+})->name('csv.form');
+
+Route::post('/upload-csv', [CsvUploadController::class, 'uploadCsv'])->name('csv.upload');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
