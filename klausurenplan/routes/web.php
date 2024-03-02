@@ -35,6 +35,11 @@ Route::get('/create-supervisor', function(){
     return view('create-supervisor');
 });
 
+Route::get('/create-room', function(){
+    return view('create-room');
+});
+
+
 Route::get('/upload-csv', function () {
     return view('upload');
 })->name('csv.form');
