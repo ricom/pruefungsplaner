@@ -13,13 +13,12 @@
 
         </div>
 
-        <input type="file" id="file-input" class="mb-4 text-blue-500 font-bold"/>
+        <input type="file" id="file-input" class="mb-4 text-blue-500 font-bold" accept=".csv"/>
 
         <div>
             <select id="semester-dropdown" class="mb-4 font-bold">
-            <option value="sommer">Sommersemester</option>
-            <option value="winter">Wintersemester</option>
-
+                <option value="sommer">Sommersemester</option>
+                <option value="winter">Wintersemester</option>
             </select>
 
             <input type="text" id="input-text" class="mb-4 font-bold"/>
