@@ -27,20 +27,20 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/uploadcsv', function(){
-    return view('uploadcsv');
-});
-
-Route::get('/create-supervisor', function(){
+Route::get('/create-supervisor', function () {
     return view('create-supervisor');
-});
+})->middleware(['auth', 'verified'])->name('create-supervisor');
 
-Route::get('/create-room', function(){
+Route::get('/create-room', function () {
     return view('create-room');
-});
+})->middleware(['auth', 'verified'])->name('create-room');
 
+Route::get('/upload-csv', function(){
+    return view('upload-csv');
+})->middleware(['auth', 'verified'])->name('upload-csv');
 
-Route::get('/upload-csv', function () {
+// old route renamed
+Route::get('/merlin-upload-csv', function () {
     return view('upload');
 })->name('csv.form');
 
