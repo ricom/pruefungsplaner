@@ -1,5 +1,5 @@
 <x-app-layout>
-<x-slot name="header">
+    <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Klausurplan hochladen') }}
         </h2>
@@ -7,25 +7,31 @@
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-        <div id="drag-drop-area" class="border border-dashed rounded-3xl border-2 h-64 mt-4 mb-4 flex justify-center items-center">
+        <div id="drag-drop-area" class="border border-dashed rounded-3xl h-64 mt-4 mb-4 flex justify-center items-center">
 
             <label class="text-center uppercase font-bold text-gray-500 text-xl">CSV Datei hier reinziehen</label>
 
         </div>
 
-        <div class="flex place-content-between">
+        <input type="file" id="file-input" class="mb-4 text-blue-500 font-bold" accept=".csv"/>
 
-            <input type="file" id="file-input" class="mb-4 text-blue-500 font-bold"/>
+        <div>
+            <select id="semester-dropdown" class="mb-4 font-bold">
+                <option value="sommer">Sommersemester</option>
+                <option value="winter">Wintersemester</option>
+            </select>
 
-            <button type="submit" id="upload-button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">Absenden</button>
-
+            <input type="text" id="input-text" class="mb-4 font-bold"/>
         </div>
+
+        <button id="button" type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">CSV hochladen</button>
+    
     </div>
 
     <script>
         const dragDropArea = document.getElementById('drag-drop-area');
         const fileInput = document.getElementById('file-input');
-        const uploadButton = document.getElementById('upload-button');
+        const button = document.getElementById('button');
 
         dragDropArea.addEventListener('dragover', (e) => {
             e.preventDefault();
@@ -51,7 +57,7 @@
             }
         });
 
-        uploadButton.addEventListener('click', () => {
+        button.addEventListener('click', () => {
             if (fileInput.files.length > 0) {
                 // Perform file upload logic here
             } else {
