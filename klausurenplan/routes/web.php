@@ -31,6 +31,10 @@ Route::get('/uploadcsv', function(){
     return view('uploadcsv');
 });
 
+Route::get('/create-supervisor', function(){
+    return view('create-supervisor');
+});
+
 Route::get('/upload-csv', function () {
     return view('upload');
 })->name('csv.form');
