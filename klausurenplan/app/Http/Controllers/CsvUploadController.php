@@ -37,6 +37,7 @@ class CsvUploadController extends Controller
                         $examFormat = ExamFormat::firstOrCreate(['name' => $row[6]]);
                         $degree     = Degree::firstOrCreate(['name' => $row[7]]);
                         $faculty    = Faculty::firstOrCreate(['name' => $row[8]]);
+                        // $semester   = Semester::firstOrCreate(['name' => $row[9]]);
 
                         $exam       = Exam::firstOrCreate(
                             [
@@ -52,7 +53,6 @@ class CsvUploadController extends Controller
                                 'exam_format_id'    => $examFormat->id,
                                 'lecturer_id'       => $lecturer->id,
                                 'course_id'         => $course->id,
-                                'room_id'           => 1, // wrong
                                 'semester_id'       => 1, // wrong
                                 'faculty_id'        => $faculty->id,
                                 'degree_id'         => $degree->id,
