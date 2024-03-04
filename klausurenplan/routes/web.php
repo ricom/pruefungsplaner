@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CsvUploadController;
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,7 @@ Route::get('/upload-csv', function(){
 Route::get('/merlin-upload-csv', function () {
     return view('upload');
 })->name('csv.form');
+Route::get('/upload-csv', [ExamController::class, 'uploadForm'])->name('csv.form');
 
 Route::post('/upload-csv', [CsvUploadController::class, 'uploadCsv'])->name('csv.upload');
 
