@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\CsvController;
+use App\Http\Controllers\API\RoomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/upload-csv', [CsvController::class, 'store'])->name('csv.upload');
+
+Route::apiResource('csv', CsvController::class);
+Route::apiResource('rooms', RoomController::class);
