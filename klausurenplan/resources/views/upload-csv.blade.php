@@ -25,7 +25,7 @@
                 <input type="text" name="semester-year" id="semester-year" class="mb-4 font-bold"/>
             </div>
 
-            <button type="button" id="upload-button" class="px-4 py-2 bg-blue-500 text-white rounded-md">CSV hochladen</button>
+            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">CSV hochladen</button>
         
         </div>
     </form>
