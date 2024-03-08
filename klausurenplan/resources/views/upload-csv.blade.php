@@ -10,11 +10,7 @@
         @csrf <!-- CSRF token is still needed for AJAX requests from within Laravel applications -->
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <div id="drag-drop-area" class="border border-dashed rounded-3xl h-64 mt-4 mb-4 flex justify-center items-center">
-                <label class="text-center uppercase font-bold text-gray-500 text-xl">CSV Datei hier reinziehen</label>
-            </div>
-
-            <input type="file" name="file-input" id="file-input" class="mb-4 text-blue-500 font-bold" accept=".csv"/>
+            <input type="file" name="file-input" id="file-input" class="mb-4 mt-4 text-blue-500 font-bold" accept=".csv"/>
 
             <div>
                 <select name="semester-season" id="semester-season" class="mb-4 font-bold">
@@ -34,23 +30,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             const uploadButton = document.getElementById('upload-button');
             const fileInput = document.getElementById('file-input');
-            const dragDropArea = document.getElementById('drag-drop-area');
-
-            dragDropArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                dragDropArea.classList.add('drag-over');
-            });
-
-            dragDropArea.addEventListener('dragleave', (e) => {
-                e.preventDefault();
-                dragDropArea.classList.remove('drag-over');
-            });
-
-            dragDropArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                dragDropArea.classList.remove('drag-over');
-                fileInput.files = e.dataTransfer.files;
-            });
 
             uploadButton.addEventListener('click', function () {
                 if (fileInput.files.length > 0) {
