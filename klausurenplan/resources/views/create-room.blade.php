@@ -31,53 +31,56 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            fetchRooms();
-
-            document.getElementById('create-room-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const formData = {
-                    name: document.getElementById('name').value,
-                    capacity: document.getElementById('capacity').value,
-                };
-                createRoom(formData);
-            });
-        });
-
+        // Fetch all rooms and display them
         function fetchRooms() {
-            fetch('/api/rooms') // Adjust the URL to match your API endpoint
-            .then(response => response.json())
-            .then(data => {
-                const list = document.getElementById('room-list');
-                list.innerHTML = ''; // Clear existing rooms
-                data.forEach(room => {
-                    const item = document.createElement('li');
-                    item.classList.add('py-4', 'flex', 'justify-between');
-                    item.innerHTML = `
-                        <span>Raumbezeichnung: ${room.name}, Kapazität: ${room.capacity}</span>
-                        <div>
-                            <button onclick="editRoom(${room.id})" class="text-indigo-600 hover:text-indigo-900">Edit</button>
-                            <button onclick="deleteRoom(${room.id})" class="text-red-600 hover:text-red-900">Delete</button>
-                        </div>
-                    `;
-                    list.appendChild(item);
+            fetch('/api/rooms')
+                .then(response => response.json())
+                .then(rooms => {
+                    const roomList = document.getElementById('room-list');
+                    roomList.innerHTML = '';
+                    rooms.forEach(room => {
+                        const li = document.createElement('li');
+                        li.textContent = `${room.name} (Kapazität: ${room.capacity})`;
+
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Delete';
+                        deleteButton.addEventListener('click', () => {
+                            deleteRoom(room.id);
+                            fetchRooms();
+                        });
+
+                        li.appendChild(deleteButton);
+                        roomList.appendChild(li);
+                    });
                 });
-            })
-            .catch(error => {
-                console.error('Error fetching rooms:', error);
-            });
-        }
-
-        function createRoom(formData) {
-            // Implement AJAX call to POST /api/rooms with formData
-        }
-
-        function editRoom(roomId) {
-            // Implement functionality to edit a room, possibly by populating the form with existing values and adjusting the form action
         }
 
         function deleteRoom(roomId) {
-            // Implement AJAX call to DELETE /api/rooms/{roomId}
+            fetch(`/api/rooms/${roomId}`, {
+                method: 'DELETE'
+            })
+                .then(response => response.json())
+                .then(() => {
+                    fetchRooms();
+                });
         }
+
+        // Create a new room
+        document.getElementById('create-room-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('/api/rooms', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(room => {
+                    fetchRooms();
+                    this.reset();
+                });
+        });
+
+        // Fetch rooms on page load
+        fetchRooms();
     </script>
 </x-app-layout>
