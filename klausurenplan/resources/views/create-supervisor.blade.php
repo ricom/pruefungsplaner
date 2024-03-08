@@ -12,26 +12,17 @@
 
             <div class="form-group flex">
                 <div class="w-1/2 mr-2">
-                    <label for="name" class="block text-white">Vorname:</label>
+                    <label for="name" class="block text-sm font-medium text-gray-300">Vorname:</label>
                     <input type="text" name="name" id="name" class="w-full max-w-full border-gray-300 rounded-md shadow-sm">
                 </div>
                 <div class="w-1/2">
-                    <label for="lastname" class="block text-white">Nachname:</label>
+                    <label for="lastname" class="block text-sm font-medium text-gray-300">Nachname:</label>
                     <input type="text" name="lastname" id="lastname" class="w-full max-w-full border-gray-300 rounded-md shadow-sm">
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="fachbereich" class="block text-white">Fachbereich:</label>
-                <select name="fachbereich" id="fachbereich" class="w-full max-w-full border-gray-300 rounded-md shadow-sm">
-                    <option value="fachbereich1">Fachbereich 1</option>
-                    <option value="fachbereich2">Fachbereich 2</option>
-                    <option value="fachbereich3">Fachbereich 3</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="email" class="block text-white">Email:</label>
+                <label for="email" class="block text-sm font-medium text-gray-300">Email:</label>
                 <input type="email" name="email" id="email" class="w-full max-w-full border-gray-300 rounded-md shadow-sm">
             </div>
 
