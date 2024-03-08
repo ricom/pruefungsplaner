@@ -23,8 +23,8 @@ class SupervisorController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string',
-            'lastname' => 'required|string',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|string|email',
         ]);
     

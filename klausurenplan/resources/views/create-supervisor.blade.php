@@ -12,11 +12,11 @@
             <div class="form-group flex">
                 <div class="w-1/2 mr-2">
                     <label for="name" class="block text-sm font-medium text-gray-300">Vorname:</label>
-                    <input type="text" name="name" id="name" class="w-full max-w-full border-gray-300 rounded-md shadow-sm">
+                    <input type="text" name="first_name" id="name" class="w-full max-w-full border-gray-300 rounded-md shadow-sm">
                 </div>
                 <div class="w-1/2">
                     <label for="lastname" class="block text-sm font-medium text-gray-300">Nachname:</label>
-                    <input type="text" name="lastname" id="lastname" class="w-full max-w-full border-gray-300 rounded-md shadow-sm">
+                    <input type="text" name="last_name" id="lastname" class="w-full max-w-full border-gray-300 rounded-md shadow-sm">
                 </div>
             </div>
 
