@@ -33,7 +33,7 @@
                                 {{ __('Raum hinzufügen') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('create-room')">
+                            <x-dropdown-link :href="route('update-room')">
                                 {{ __('Raum ändern') }}
                             </x-dropdown-link>
 
@@ -54,7 +54,7 @@
                                 {{ __('Aufsichtspersonen hinzufügen') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('create-supervisor')">
+                            <x-dropdown-link :href="route('update-supervisor')">
                                 {{ __('Aufsichtspersonen ändern') }}
                             </x-dropdown-link>
 
