@@ -46,6 +46,8 @@ class SupervisorController extends Controller
     public function update(Request $request, Supervisor $supervisor)
     {
         $validatedData = $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|string|email',
         ]);
 
