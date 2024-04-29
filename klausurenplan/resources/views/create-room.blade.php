@@ -70,20 +70,6 @@
             function deleteRoom(roomId) {
                 fetch(`/api/rooms/${roomId}`, {
                     method: 'DELETE'
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(() => {
-                    fetchRooms();
-                    closeUpdateForm(); // Close the update form after successful delete
-                })
-                .catch(error => {
-                    console.error('Error deleting room:', error);
-                    // Optionally display an error message to the user
                 });
             }
 
