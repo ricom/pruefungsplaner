@@ -20,47 +20,13 @@
                         {{ __('CSV hochladen') }}
                     </x-nav-link>
 
-                    <x-dropdown width="48">
-                        <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                {{ __( 'Räume') }}
-                            </button>
-                        </x-slot>
+                    <x-nav-link :href="route('create-room')" :active="request()->routeIs('create-room')">
+                    {{ __( 'Räume') }}
+                    </x-nav-link>
 
-                        <x-slot name="content">
-
-                            <x-dropdown-link :href="route('create-room')">
-                                {{ __('Raum hinzufügen') }}
-                            </x-dropdown-link>
-
-                            <x-dropdown-link :href="route('update-room')">
-                                {{ __('Raum ändern') }}
-                            </x-dropdown-link>
-
-                        </x-slot>
-
-                    </x-dropdown>
-
-                    <x-dropdown width="48">
-                        <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                {{ __( 'Aufsichtspersonen') }}
-                            </button>
-                        </x-slot>
-
-                        <x-slot name="content">
-
-                            <x-dropdown-link :href="route('create-supervisor')">
-                                {{ __('Aufsichtspersonen hinzufügen') }}
-                            </x-dropdown-link>
-
-                            <x-dropdown-link :href="route('update-supervisor')">
-                                {{ __('Aufsichtspersonen ändern') }}
-                            </x-dropdown-link>
-
-                        </x-slot>
-
-                    </x-dropdown>
+                    <x-nav-link :href="route('create-supervisor')" :active="request()->routeIs('create-supervisor')">
+                    {{ __( 'Aufsichtspersonen') }}
+                    </x-nav-link>
                 </div>
             </div>
 
