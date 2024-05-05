@@ -8,10 +8,8 @@ Route::redirect('/', '/dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
-    Route::view('/create-supervisor', 'create-supervisor')->name('create-supervisor');
-    Route::view('/update-supervisor', 'update-supervisor')->name('update-supervisor');
-    Route::view('/create-room', 'create-room')->name('create-room');
-    Route::view('/update-room', 'update-room')->name('update-room');
+    Route::view('/supervisors', 'supervisors')->name('supervisors');
+    Route::view('/rooms', 'rooms')->name('rooms');
     Route::view('/upload-csv', 'upload-csv')->name('upload-csv');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

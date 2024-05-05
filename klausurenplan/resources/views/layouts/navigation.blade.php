@@ -20,11 +20,11 @@
                         {{ __('CSV hochladen') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('create-room')" :active="request()->routeIs('create-room')">
+                    <x-nav-link :href="route('rooms')" :active="request()->routeIs('rooms')">
                     {{ __( 'Räume') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('create-supervisor')" :active="request()->routeIs('create-supervisor')">
+                    <x-nav-link :href="route('supervisors')" :active="request()->routeIs('supervisors')">
                     {{ __( 'Aufsichtspersonen') }}
                     </x-nav-link>
                 </div>
