@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('klausurplan') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-32 h-auto">
                     </a>
                 </div>
 
@@ -21,11 +21,11 @@
                     </x-nav-link>
 
                     <x-nav-link :href="route('rooms')" :active="request()->routeIs('rooms')">
-                    {{ __( 'Räume') }}
+                        {{ __( 'Räume') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('supervisors')" :active="request()->routeIs('supervisors')">
-                    {{ __( 'Aufsichtspersonen') }}
+                        {{ __( 'Aufsichtspersonen') }}
                     </x-nav-link>
                 </div>
             </div>
