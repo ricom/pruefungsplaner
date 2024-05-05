@@ -4,10 +4,10 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', '/dashboard');
+Route::redirect('/', '/klausurplan');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::view('/dashboard', 'dashboard')->name('dashboard');
+    Route::view('/klausurplan', 'klausurplan')->name('klausurplan');
     Route::view('/supervisors', 'supervisors')->name('supervisors');
     Route::view('/rooms', 'rooms')->name('rooms');
     Route::view('/upload-csv', 'upload-csv')->name('upload-csv');
