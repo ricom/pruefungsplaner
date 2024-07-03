@@ -11,17 +11,16 @@
 
             <div class="form-group flex">
                 <div class="w-1/2 mr-2">
-                    <label for="first_name" class="block text-sm font-medium text-gray-300">Vorname:</label>
+                    <label for="first_name" class="block text-sm font-medium text-gray-800, dark:text-gray-200">Vorname:</label>
                     <input type="text" name="first_name" id="first_name" class="w-full max-w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
                 <div class="w-1/2">
-                    <label for="last_name" class="block text-sm font-medium text-gray-300">Nachname:</label>
+                    <label for="last_name" class="block text-sm font-medium text-gray-800, dark:text-gray-200">Nachname:</label>
                     <input type="text" name="last_name" id="last_name" class="w-full max-w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
             </div>
-
             <div class="form-group">
-                <label for="email" class="block text-sm font-medium text-gray-300">Email:</label>
+                <label for="email" class="block text-sm font-medium text-gray-800, dark:text-gray-200">Email:</label>
                 <input type="email" name="email" id="email" class="w-full max-w-full border-gray-300 rounded-md shadow-sm" required>
             </div>
 
@@ -60,15 +59,15 @@
                     @method('PUT')
                     <input type="hidden" id="update-id" name="id">
                     <div class="form-group">
-                        <label for="update-first-name" class="block text-sm font-medium text-gray-700">Vorname:</label>
+                        <label for="update-first-name" class="block text-sm font-medium text-gray-800, dark:text-gray-200">Vorname:</label>
                         <input type="text" id="update-first-name" name="first_name" class="w-full border-gray-300 rounded-md shadow-sm" required>
                     </div>
                     <div class="form-group">
-                        <label for="update-last-name" class="block text-sm font-medium text-gray-700">Nachname:</label>
+                        <label for="update-last-name" class="block text-sm font-medium text-gray-800, dark:text-gray-200">Nachname:</label>
                         <input type="text" id="update-last-name" name="last_name" class="w-full border-gray-300 rounded-md shadow-sm" required>
                     </div>
                     <div class="form-group">
-                        <label for="update-email" class="block text-sm font-medium text-gray-700">Email:</label>
+                        <label for="update-email" class="block text-sm font-medium text-gray-800, dark:text-gray-200">Email:</label>
                         <input type="email" id="update-email" name="email" class="w-full border-gray-300 rounded-md shadow-sm" required>
                     </div>
                     <div class="flex justify-end">
@@ -185,14 +184,15 @@
 
             function createSupervisorRow(id, first_name, last_name, email) {
                 const supervisorRow = document.createElement('tr');
+                supervisorRow.classList.add('border-b-2')
 
                 const nameCell = document.createElement('td');
                 nameCell.textContent = `${first_name} ${last_name}`;
-                nameCell.classList.add('px-6', 'w-1/4', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-white');
+                nameCell.classList.add('px-6', 'w-1/4', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-gray-800', 'dark:text-gray-200');
 
                 const emailCell = document.createElement('td');
                 emailCell.textContent = email;
-                emailCell.classList.add('px-6', 'w-3/4', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-white');
+                emailCell.classList.add('px-6', 'w-3/4', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-gray-800', 'dark:text-gray-200');
 
                 const actionsCell = document.createElement('td');
                 actionsCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'items-center', 'text-sm', 'text-white-900');

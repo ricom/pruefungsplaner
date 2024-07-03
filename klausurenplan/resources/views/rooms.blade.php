@@ -11,11 +11,11 @@
 
             <div class="form-group flex">
                 <div class="w-1/2 mr-2">
-                    <label for="name" class="block text-sm font-medium text-gray-300">Raumbezeichnung:</label>
+                    <label for="name" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Raumbezeichnung:</label>
                     <input type="text" name="name" id="name" required class="w-full max-w-full border-gray-300 rounded-md shadow-sm">
                 </div>
                 <div class="w-1/2">
-                    <label for="capacity" class="block text-sm font-medium text-gray-300">Kapazität:</label>
+                    <label for="capacity" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Kapazität:</label>
                     <input type="number" name="capacity" id="capacity" required class="w-full max-w-full border-gray-300 rounded-md shadow-sm">
                 </div>
             </div>
@@ -31,9 +31,9 @@
                 <table class="mt-3 w-full rounded-lg overflow-hidden">
                     <thead class="bg-gray-200 dark:bg-gray-800">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Raum</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Kapazität</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Aktionen</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-800 dark:text-gray-200 uppercase tracking-wider">Raum</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-800 dark:text-gray-200 uppercase tracking-wider">Kapazität</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-800 dark:text-gray-200 uppercase tracking-wider">Aktionen</th>
                         </tr>
                     </thead>
                     <tbody id="room-list"></tbody>
@@ -55,11 +55,11 @@
                     @method('PUT')
                     <input type="hidden" id="update-id" name="id">
                     <div class="form-group">
-                        <label for="update-name" class="block text-sm font-medium text-gray-700">Raumbezeichung:</label>
+                        <label for="update-name" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Raumbezeichung:</label>
                         <input type="text" id="update-name" name="name" class="w-full border-gray-300 rounded-md shadow-sm" required>
                     </div>
                     <div class="form-group">
-                        <label for="update-capacity" class="block text-sm font-medium text-gray-700">Kapazität:</label>
+                        <label for="update-capacity" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Kapazität:</label>
                         <input type="number" id="update-capacity" name="capacity" class="w-full border-gray-300 rounded-md shadow-sm" required>
                     </div>
                     <div class="flex justify-end">
@@ -175,14 +175,15 @@
 
             function createRoomRow(room) {
                 const roomRow = document.createElement('tr');
+                roomRow.classList.add('border-b-2')
 
                 const nameCell = document.createElement('td');
                 nameCell.textContent = room.name;
-                nameCell.classList.add('px-6', 'w-1/4', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-white');
+                nameCell.classList.add('px-6', 'w-1/4', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-gray-800', 'dark:text-gray-200');
 
                 const capacityCell = document.createElement('td');
                 capacityCell.textContent = room.capacity;
-                capacityCell.classList.add('px-6', 'w-3/4', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-white');
+                capacityCell.classList.add('px-6', 'w-3/4', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-gray-800', 'dark:text-gray-200');
 
                 const actionsCell = document.createElement('td');
                 actionsCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'items-center', 'text-sm', 'text-white-900');
