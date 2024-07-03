@@ -50,17 +50,21 @@ class SupervisorController extends Controller
             'last_name' => 'required|string',
             'email' => 'required|string|email',
         ]);
-
+    
         $supervisor->update($validatedData);
         return response()->json($supervisor);
-    }
+    }    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Supervisor $supervisor)
     {
-        $supervisor->delete();
-        return response()->json(null, 204);
+        try {
+            $supervisor->delete();
+            return response()->json(null, 204);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error deleting supervisor: ' . $e->getMessage()], 500);
+        }
     }
 }

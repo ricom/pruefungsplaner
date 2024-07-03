@@ -11,18 +11,18 @@
 
             <div class="form-group flex">
                 <div class="w-1/2 mr-2">
-                    <label for="name" class="block text-sm font-medium text-gray-300">Vorname:</label>
-                    <input type="text" name="first_name" id="name" class="w-full max-w-full border-gray-300 rounded-md shadow-sm">
+                    <label for="first_name" class="block text-sm font-medium text-gray-300">Vorname:</label>
+                    <input type="text" name="first_name" id="first_name" class="w-full max-w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
                 <div class="w-1/2">
-                    <label for="lastname" class="block text-sm font-medium text-gray-300">Nachname:</label>
-                    <input type="text" name="last_name" id="lastname" class="w-full max-w-full border-gray-300 rounded-md shadow-sm">
+                    <label for="last_name" class="block text-sm font-medium text-gray-300">Nachname:</label>
+                    <input type="text" name="last_name" id="last_name" class="w-full max-w-full border-gray-300 rounded-md shadow-sm" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="email" class="block text-sm font-medium text-gray-300">Email:</label>
-                <input type="email" name="email" id="email" class="w-full max-w-full border-gray-300 rounded-md shadow-sm">
+                <input type="email" name="email" id="email" class="w-full max-w-full border-gray-300 rounded-md shadow-sm" required>
             </div>
 
             <button id="submit-button" type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">Aufsichtsperson erstellen</button>
@@ -47,9 +47,45 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div id="modal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity">
+                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>​
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <form id="update-form" class="space-y-4 p-6">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" id="update-id" name="id">
+                    <div class="form-group">
+                        <label for="update-first-name" class="block text-sm font-medium text-gray-700">Vorname:</label>
+                        <input type="text" id="update-first-name" name="first_name" class="w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="update-last-name" class="block text-sm font-medium text-gray-700">Nachname:</label>
+                        <input type="text" id="update-last-name" name="last_name" class="w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="update-email" class="block text-sm font-medium text-gray-700">Email:</label>
+                        <input type="email" id="update-email" name="email" class="w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="button" id="close-modal" class="px-4 py-2 bg-gray-500 text-white rounded-md mr-2">Abbrechen</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md">Aktualisieren</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('supervisor-form');
+            const updateForm = document.getElementById('update-form');
+            const modal = document.getElementById('modal');
+            const closeModal = document.getElementById('close-modal');
 
             form.addEventListener('submit', function (event) {
                 event.preventDefault();
@@ -65,12 +101,13 @@
                 })
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Network response was not ok');
+                        return response.json().then(error => {
+                            throw new Error(error.message || 'Network response was not ok');
+                        });
                     }
                     return response.json();
                 })
                 .then(data => {
-                    alert('Aufsichtsperson wurde erfolgreich erstellt.');
                     form.reset();
                     fetchSupervisors(); // Fetch supervisors again to update the list
                 })
@@ -79,6 +116,51 @@
                     console.error('Error creating supervisor:', error);
                 });
             });
+
+            updateForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const id = document.getElementById('update-id').value;
+                const formData = new FormData(updateForm);
+
+                fetch(`/api/supervisors/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(error => {
+                            throw new Error(error.message || 'Network response was not ok');
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    updateForm.reset();
+                    closeModal.click();
+                    fetchSupervisors();
+                })
+                .catch(error => {
+                    alert('Fehler beim Aktualisieren der Aufsichtsperson.');
+                    console.error('Error updating supervisor:', error);
+                });
+            });
+
+            closeModal.addEventListener('click', function () {
+                modal.classList.add('hidden');
+            });
+
+            function openModal(supervisor) {
+                document.getElementById('update-id').value = supervisor.id;
+                document.getElementById('update-first-name').value = supervisor.firstName;
+                document.getElementById('update-last-name').value = supervisor.lastName;
+                document.getElementById('update-email').value = supervisor.email;
+
+                modal.classList.remove('hidden');
+            }
 
             function fetchSupervisors() {
                 fetch('/api/supervisors')
@@ -98,7 +180,6 @@
                 })
                 .catch(error => {
                     console.error('Error fetching supervisors:', error);
-                    //  Optionally display an error message to the user
                 });
             }
 
@@ -114,13 +195,13 @@
                 emailCell.classList.add('px-6', 'w-3/4', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-white');
 
                 const actionsCell = document.createElement('td');
-                actionsCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'items-ste', 'text-sm', 'text-white-900');
+                actionsCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'items-center', 'text-sm', 'text-white-900');
 
                 const updateButton = document.createElement('button');
                 updateButton.textContent = 'Bearbeiten';
                 updateButton.classList.add('px-4', 'py-2', 'bg-blue-500', 'text-white', 'rounded-md', 'mr-2');
                 updateButton.addEventListener('click', function() {
-                    // Show Modal with form to update supervisor
+                    openModal({ id, firstName: first_name, lastName: last_name, email });
                 });
 
                 const deleteButton = document.createElement('button');
@@ -128,7 +209,6 @@
                 deleteButton.classList.add('px-4', 'py-2', 'bg-red-500', 'text-white', 'rounded-md');
                 deleteButton.addEventListener('click', function() {
                     deleteSupervisor(id);
-                    fetchSupervisors();
                 });
 
                 actionsCell.appendChild(updateButton);
@@ -141,40 +221,40 @@
                 return supervisorRow;
             }
 
-            // TODO: implement the model functionality to update a supervisor
-
-            function updateSupervisor(id, formData) {
-                fetch(`/api/supervisors/${id}`, {
-                    method: 'UPDATE',
-                    body: formData
-                }).then(response => {
-                    fetchSupervisors(); // Fetch supervisors again to update the list
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    alert('Aufsichtsperson wurde aktualisiert.');
-                }).catch(error => {
-                    alert('Fehler beim Aktualisieren der Aufsichtsperson.');
-                    console.error('Error updating supervisor:', error);
-                });
-            }
-
             function deleteSupervisor(id) {
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
                 fetch(`/api/supervisors/${id}`, {
                     method: 'DELETE',
-                }).then(response => {
-                    fetchSupervisors(); // Fetch supervisors again to update the list
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                })
+                .then(response => {
                     if (!response.ok) {
-                        throw new Error('Network response was not ok');
+                        return response.json().then(error => {
+                            throw new Error(error.message || 'Network response was not ok');
+                        });
                     }
+                    // Handle 204 No Content separately
+                    if (response.status === 204) {
+                        return null;
+                    }
+                    return response.json();
+                })
+                .then(data => {
                     alert('Aufsichtsperson wurde gelöscht.');
-                }).catch(error => {
-                    alert('Fehler beim Löschen der Aufsichtsperson.');
+                    fetchSupervisors();
+                })
+                .catch(error => {
+                    alert('Fehler beim Löschen der Aufsichtsperson: ' + error.message);
                     console.error('Error deleting supervisor:', error);
+                    fetchSupervisors();
                 });
             }
 
-            fetchSupervisors(); // Fetch supervisors when the page loads
+            fetchSupervisors();
         });
     </script>
 </x-app-layout>
