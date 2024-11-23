@@ -14,7 +14,6 @@
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Datum</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Klausur</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Raum</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Kapazität</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Aufsichtsperson 1</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Aufsichtsperson 2</th>
                         </tr>
@@ -41,10 +40,17 @@ async function fetchAndPopulateExams() {
         ]);
 
         // Generate room and supervisor options
-        const roomOptions = rooms.map(room => `<option value="${room.id}">${room.name}</option>`).join("");
-        const supervisorOptions = supervisors.map(supervisor => 
-            `<option value="${supervisor.id}">${supervisor.first_name} ${supervisor.last_name}</option>`
-        ).join("");
+        const roomOptions = `
+            <option value="" disabled selected>Raum auswählen</option>
+            ${rooms.map(room => `<option value="${room.id}">${room.name} (${room.capacity})</option>`).join("")}
+        `;
+
+        const supervisorOptions = `
+            <option value="" disabled selected>Aufsichtsperson auswählen</option>
+            ${supervisors.map(supervisor => 
+                `<option value="${supervisor.id}">${supervisor.first_name} ${supervisor.last_name}</option>`
+            ).join("")}
+        `;
 
         // Clear existing rows
         examList.innerHTML = "";
@@ -70,7 +76,6 @@ async function fetchAndPopulateExams() {
                         ${roomOptions}
                     </select>
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap">${roomCapacity}</td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     <select class="w-full rounded-md border-gray-300 shadow-sm">
                         ${supervisorOptions}
