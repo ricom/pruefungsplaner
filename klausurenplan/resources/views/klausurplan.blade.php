@@ -20,238 +20,7 @@
                         </tr>
                     </thead>
                     <tbody id="exam-list">
-                        <tr class="border-b-2">
-                            <td class="px-6 py-4 whitespace-nowrap">14.07.24</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <b>Mathematik 2</b><br>
-                                <small>Ute Karabek</small>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">H204</option>
-                                    <option value="2">H304</option>
-                                    <option value="3">H404</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">420</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr class="border-b-2">
-                            <td class="px-6 py-4 whitespace-nowrap">14.07.24</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <b>Mathematik 2</b><br>
-                                <small>Ute Karabek</small>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">H204</option>
-                                    <option value="2">H304</option>
-                                    <option value="3">H404</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">? / 175</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr class="border-b-2">
-                            <td class="px-6 py-4 whitespace-nowrap">14.07.24</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <b>Mathematik 2</b><br>
-                                <small>Ute Karabek</small>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">H204</option>
-                                    <option value="2">H304</option>
-                                    <option value="3">H404</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">140 / 175</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr class="border-b-2">
-                            <td class="px-6 py-4 whitespace-nowrap">14.07.24</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <b>Mathematik 2</b><br>
-                                <small>Ute Karabek</small>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">H204</option>
-                                    <option value="2">H304</option>
-                                    <option value="3">H404</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">420</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr class="border-b-2">
-                            <td class="px-6 py-4 whitespace-nowrap">14.07.24</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <b>Mathematik 2</b><br>
-                                <small>Ute Karabek</small>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">H204</option>
-                                    <option value="2">H304</option>
-                                    <option value="3">H404</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">420</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr class="border-b-2">
-                            <td class="px-6 py-4 whitespace-nowrap">14.07.24</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <b>Mathematik 2</b><br>
-                                <small>Ute Karabek</small>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">H204</option>
-                                    <option value="2">H304</option>
-                                    <option value="3">H404</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">420</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr class="border-b-2">
-                            <td class="px-6 py-4 whitespace-nowrap">14.07.24</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <b>Mathematik 2</b><br>
-                                <small>Ute Karabek</small>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">H204</option>
-                                    <option value="2">H304</option>
-                                    <option value="3">H404</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">420</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr class="border-b-2">
-                            <td class="px-6 py-4 whitespace-nowrap">14.07.24</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <b>Mathematik 2</b><br>
-                                <small>Ute Karabek</small>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">H204</option>
-                                    <option value="2">H304</option>
-                                    <option value="3">H404</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">420</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <select name="aufsichtsperson1" id="aufsichtsperson1" class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="1">Aufsichtsperson 1</option>
-                                    <option value="2">Aufsichtsperson 2</option>
-                                    <option value="3">Aufsichtsperson 3</option>
-                                </select>
-                            </td>
-                        </tr>
+                        <!-- Exams will be populated here -->
                     </tbody>
                 </table>
             </div>
@@ -260,25 +29,76 @@
 
     <script>
 
-        function fetchExams() {
-            fetch('/api/exams')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(exams => {
-                const examList = document
-                console.log(exams);
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
-        }
+async function fetchAndPopulateExams() {
+    const examList = document.getElementById("exam-list");
 
-        fetchExams();
+    try {
+        // Fetch data concurrently
+        const [rooms, supervisors, exams] = await Promise.all([
+            fetch("/api/rooms").then(res => res.json()),
+            fetch("/api/supervisors").then(res => res.json()),
+            fetch("/api/exams").then(res => res.json())
+        ]);
 
-    </script>
+        // Generate room and supervisor options
+        const roomOptions = rooms.map(room => `<option value="${room.id}">${room.name}</option>`).join("");
+        const supervisorOptions = supervisors.map(supervisor => 
+            `<option value="${supervisor.id}">${supervisor.first_name} ${supervisor.last_name}</option>`
+        ).join("");
+
+        // Clear existing rows
+        examList.innerHTML = "";
+
+        // Populate exams into the table
+        exams.forEach(exam => {
+            const row = document.createElement("tr");
+            row.classList.add("border-b-2");
+
+            const lecturerName = exam.lecturer ? exam.lecturer.name : 'No Lecturer';
+            const examFormatName = exam.exam_format ? exam.exam_format.name : 'No Exam Format';
+            const degreeName = exam.degree ? exam.degree.name : 'No Degree';
+            const roomCapacity = rooms.find(room => room.id === exam.room_id)?.capacity || "Unknown";
+
+            row.innerHTML = `
+                <td class="px-6 py-4 whitespace-nowrap">${formatDate(exam.date)}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <b>${degreeName}</b><br>
+                    ${lecturerName}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <select class="w-full rounded-md border-gray-300 shadow-sm">
+                        ${roomOptions}
+                    </select>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">${roomCapacity}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <select class="w-full rounded-md border-gray-300 shadow-sm">
+                        ${supervisorOptions}
+                    </select>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <select class="w-full rounded-md border-gray-300 shadow-sm">
+                        ${supervisorOptions}
+                    </select>
+                </td>
+            `;
+
+            examList.appendChild(row);
+        });
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+}
+
+// Helper: Format Date
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("de-DE"); // Format: DD.MM.YYYY
+}
+
+// Call the function on page load
+fetchAndPopulateExams();
+
+</script>
 
 </x-app-layout>

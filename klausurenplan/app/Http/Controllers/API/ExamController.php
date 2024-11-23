@@ -13,6 +13,8 @@ use App\Models\Room;
 use App\Models\Semester;
 use App\Models\Supervisor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ExamController extends Controller
 {
@@ -21,7 +23,18 @@ class ExamController extends Controller
      */
     public function index()
     {
-        $exams = Exam::all();
+        // Eager load the related models for exams
+        $exams = Exam::with([
+            'lecturer',
+            'course',
+            'room',
+            'semester',
+            'faculty',
+            'degree',
+            'examFormat',
+            'supervisors'
+        ])->get();
+
         return response()->json($exams);
     }
 
@@ -73,7 +86,7 @@ class ExamController extends Controller
                     'degree_id' => $degree->id,
                 ];
 
-                $exam = Exam::firstOrCreate(
+                Exam::firstOrCreate(
                     [
                         'course_id' => $course->id,
                         'semester_id' => $semester->id,
@@ -96,7 +109,22 @@ class ExamController extends Controller
      */
     public function show(Faculty $faculty, Semester $semester)
     {
-        return response()->json(Exam::where('faculty_id', $faculty->id)->where('semester_id', $semester->id)->get());
+        // Eager load related data for the specific faculty and semester
+        $exams = Exam::with([
+            'lecturer',
+            'course',
+            'room',
+            'semester',
+            'faculty',
+            'degree',
+            'examFormat',
+            'supervisors'
+        ])
+        ->where('faculty_id', $faculty->id)
+        ->where('semester_id', $semester->id)
+        ->get();
+
+        return response()->json($exams);
     }
 
     /**

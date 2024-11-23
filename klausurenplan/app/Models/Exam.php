@@ -9,10 +9,22 @@ class Exam extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date', 'start_time', 'end_time', 'participant_count', 'exam_format_id', 'lecturer_id', 'course_id', 'room_id', 'semester_id', 'faculty_id', 'degree_id'];
+    protected $fillable = [
+        'date', 
+        'start_time', 
+        'end_time', 
+        'participant_count', 
+        'exam_format_id', 
+        'lecturer_id', 
+        'course_id', 
+        'room_id', 
+        'semester_id', 
+        'faculty_id', 
+        'degree_id'
+    ];
 
     public function examFormat()
-    {
+    { 
         return $this->belongsTo(ExamFormat::class);
     }
 
