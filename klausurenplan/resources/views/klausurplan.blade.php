@@ -39,20 +39,25 @@ async function fetchAndPopulateExams() {
             fetch("/api/exams").then(res => res.json())
         ]);
 
-        // Generate room and supervisor options
-        const roomOptions = `
-            <option value="" disabled selected>Raum auswählen</option>
-            ${rooms.map(room => `<option value="${room.id}">${room.name} (${room.capacity})</option>`).join("")}
+        // Generate room options with a default placeholder
+        const generateRoomOptions = (selectedRoomId) => `
+            <option value="" disabled ${!selectedRoomId ? 'selected' : ''}>Raum auswählen</option>
+            ${rooms.map(room => `
+                <option value="${room.id}" ${room.id === selectedRoomId ? 'selected' : ''}>${room.name}</option>
+            `).join("")}
         `;
 
-        const supervisorOptions = `
-            <option value="" disabled selected>Aufsichtsperson auswählen</option>
-            ${supervisors.map(supervisor => 
-                `<option value="${supervisor.id}">${supervisor.first_name} ${supervisor.last_name}</option>`
-            ).join("")}
+        // Generate supervisor options with a default placeholder
+        const generateSupervisorOptions = (selectedSupervisorId) => `
+            <option value="Null" disabled ${!selectedSupervisorId ? 'selected' : ''}>Aufsichtsperson auswählen</option>
+            ${supervisors.map(supervisor => `
+                <option value="${supervisor.id}" ${supervisor.id === selectedSupervisorId ? 'selected' : ''}>
+                    ${supervisor.first_name} ${supervisor.last_name}
+                </option>
+            `).join("")}
         `;
 
-        // Clear existing rows
+        // Clear existing rows in the table
         examList.innerHTML = "";
 
         // Populate exams into the table
@@ -60,11 +65,19 @@ async function fetchAndPopulateExams() {
             const row = document.createElement("tr");
             row.classList.add("border-b-2");
 
-            const lecturerName = exam.lecturer ? exam.lecturer.name : 'No Lecturer';
-            const examFormatName = exam.exam_format ? exam.exam_format.name : 'No Exam Format';
-            const degreeName = exam.degree ? exam.degree.name : 'No Degree';
-            const roomCapacity = rooms.find(room => room.id === exam.room_id)?.capacity || "Unknown";
+            // Extract nested data with fallback
+            const examID = exam.id;
+            const lecturerName = exam.lecturer?.name || 'No Lecturer';
+            const examFormatName = exam.exam_format?.name || 'No Exam Format';
+            const degreeName = exam.degree?.name || 'No Degree';
+            const selectedRoomId = exam.room_id || null;
+            const selectedSupervisorIdA = exam.supervisors?.[0]?.id || null;
+            const selectedSupervisorIdB = exam.supervisors?.[1]?.id || null;
 
+            console.log(examID);
+
+
+            // Create a table row for the exam
             row.innerHTML = `
                 <td class="px-6 py-4 whitespace-nowrap">${formatDate(exam.date)}</td>
                 <td class="px-6 py-4 whitespace-nowrap">
@@ -72,22 +85,31 @@ async function fetchAndPopulateExams() {
                     ${lecturerName}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <select class="w-full rounded-md border-gray-300 shadow-sm">
-                        ${roomOptions}
+                    <select id="RoomofExam${examID}" class="w-full rounded-md border-gray-300 shadow-sm">
+                        ${generateRoomOptions(selectedRoomId)}
                     </select>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <select class="w-full rounded-md border-gray-300 shadow-sm">
-                        ${supervisorOptions}
+                    <select id="SupervisiorAofExam${examID}" class="w-full rounded-md border-gray-300 shadow-sm">
+                        ${generateSupervisorOptions(selectedSupervisorIdA)}
                     </select>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <select class="w-full rounded-md border-gray-300 shadow-sm">
-                        ${supervisorOptions}
+                    <select id="SupervisiorBofExam${examID}" class="w-full rounded-md border-gray-300 shadow-sm">
+                        ${generateSupervisorOptions(selectedSupervisorIdB)}
                     </select>
                 </td>
             `;
 
+            row.addEventListener("change", async (event) => {
+                const roomID = document.getElementById(`RoomofExam${examID}`).value;
+                const supervisorAID = document.getElementById(`SupervisiorAofExam${examID}`).value;
+                const supervisorBID = document.getElementById(`SupervisiorBofExam${examID}`).value;
+
+                console.log(roomID, supervisorAID, supervisorBID);
+            });
+
+            // Append the row to the table
             examList.appendChild(row);
         });
     } catch (error) {
@@ -103,6 +125,7 @@ function formatDate(dateString) {
 
 // Call the function on page load
 fetchAndPopulateExams();
+
 
 </script>
 

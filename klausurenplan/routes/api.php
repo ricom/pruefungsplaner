@@ -25,7 +25,5 @@ Route::apiResource('rooms', RoomController::class);
 
 // Exam Routes
 Route::get('/exams', [ExamController::class, 'index']); // List all exams
-Route::post('/exams', [ExamController::class, 'store']); // Store new exams
 Route::get('/exams/{faculty}/{semester}', [ExamController::class, 'show']); // Show exams by faculty and semester
 Route::put('/exams', [ExamController::class, 'update']); // Update exams
-Route::delete('/exams/{exam}', [ExamController::class, 'destroy']); // Delete an exam
