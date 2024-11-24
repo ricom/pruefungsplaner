@@ -8,6 +8,8 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="mt-8">
             <div class="overflow-x-auto">
+                <div id="loading" class="text-center">Loading data...</div>
+                <div id="error" class="text-center text-red-500 hidden">There was an error loading the data. Please try again later.</div>
                 <table class="mt-3 w-full rounded-lg overflow-hidden">
                     <thead class="bg-gray-200 dark:bg-gray-800">
                         <tr>
@@ -27,106 +29,144 @@
     </div>
 
     <script>
+        // Caching the fetched data to prevent redundant API calls
+        let examsData = null;
 
-async function fetchAndPopulateExams() {
-    const examList = document.getElementById("exam-list");
+        // Function to fetch all necessary data
+        async function fetchData() {
+            try {
+                const [rooms, supervisors, exams] = await Promise.all([
+                    fetch("/api/rooms").then(res => res.json()),
+                    fetch("/api/supervisors").then(res => res.json()),
+                    fetch("/api/exams").then(res => res.json())
+                ]);
+                return { rooms, supervisors, exams };
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                throw new Error("Failed to fetch data");
+            }
+        }
 
-    try {
-        // Fetch data concurrently
-        const [rooms, supervisors, exams] = await Promise.all([
-            fetch("/api/rooms").then(res => res.json()),
-            fetch("/api/supervisors").then(res => res.json()),
-            fetch("/api/exams").then(res => res.json())
-        ]);
+        // Helper function to format date to DD.MM.YYYY
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString("de-DE"); // Format: DD.MM.YYYY
+        }
 
-        // Generate room options with a default placeholder
-        const generateRoomOptions = (selectedRoomId) => `
-            <option value="" disabled ${!selectedRoomId ? 'selected' : ''}>Raum auswählen</option>
-            ${rooms.map(room => `
-                <option value="${room.id}" ${room.id === selectedRoomId ? 'selected' : ''}>${room.name}</option>
-            `).join("")}
-        `;
+        // Function to generate options for room and supervisor selects
+        function generateOptions(options, selectedId, type = 'Room') {
+            const placeholder = `${type} auswählen`;
+            return `
+                <option value="" disabled ${!selectedId ? 'selected' : ''}>${placeholder}</option>
+                ${options.map(option => `
+                    <option value="${option.id}" ${option.id === selectedId ? 'selected' : ''}>
+                        ${option.name || `${option.first_name} ${option.last_name}`}
+                    </option>
+                `).join('')}
+            `;
+        }
 
-        // Generate supervisor options with a default placeholder
-        const generateSupervisorOptions = (selectedSupervisorId) => `
-            <option value="Null" disabled ${!selectedSupervisorId ? 'selected' : ''}>Aufsichtsperson auswählen</option>
-            ${supervisors.map(supervisor => `
-                <option value="${supervisor.id}" ${supervisor.id === selectedSupervisorId ? 'selected' : ''}>
-                    ${supervisor.first_name} ${supervisor.last_name}
-                </option>
-            `).join("")}
-        `;
-
-        // Clear existing rows in the table
-        examList.innerHTML = "";
-
-        // Populate exams into the table
-        exams.forEach(exam => {
+        // Function to create a table row for each exam
+        function createExamRow(exam, rooms, supervisors) {
             const row = document.createElement("tr");
             row.classList.add("border-b-2");
 
-            // Extract nested data with fallback
-            const examID = exam.id;
-            const lecturerName = exam.lecturer?.name || 'No Lecturer';
-            const examFormatName = exam.exam_format?.name || 'No Exam Format';
-            const degreeName = exam.degree?.name || 'No Degree';
             const selectedRoomId = exam.room_id || null;
             const selectedSupervisorIdA = exam.supervisors?.[0]?.id || null;
             const selectedSupervisorIdB = exam.supervisors?.[1]?.id || null;
 
-            console.log(examID);
-
-
-            // Create a table row for the exam
             row.innerHTML = `
                 <td class="px-6 py-4 whitespace-nowrap">${formatDate(exam.date)}</td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <b>${degreeName}</b><br>
-                    ${lecturerName}
+                    <b>${exam.degree?.name || 'No Degree'}</b><br>
+                    ${exam.lecturer?.name || 'No Lecturer'}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <select id="RoomofExam${examID}" class="w-full rounded-md border-gray-300 shadow-sm">
-                        ${generateRoomOptions(selectedRoomId)}
+                    <select id="RoomofExam${exam.id}" aria-label="Select Room for Exam ${exam.id}" class="w-full rounded-md border-gray-300 shadow-sm">
+                        ${generateOptions(rooms, selectedRoomId, 'Raum')}
                     </select>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <select id="SupervisiorAofExam${examID}" class="w-full rounded-md border-gray-300 shadow-sm">
-                        ${generateSupervisorOptions(selectedSupervisorIdA)}
+                    <select id="SupervisiorAofExam${exam.id}" aria-label="Select Supervisor A for Exam ${exam.id}" class="w-full rounded-md border-gray-300 shadow-sm">
+                        ${generateOptions(supervisors, selectedSupervisorIdA, 'Aufsichtsperson 1')}
                     </select>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
-                    <select id="SupervisiorBofExam${examID}" class="w-full rounded-md border-gray-300 shadow-sm">
-                        ${generateSupervisorOptions(selectedSupervisorIdB)}
+                    <select id="SupervisiorBofExam${exam.id}" aria-label="Select Supervisor B for Exam ${exam.id}" class="w-full rounded-md border-gray-300 shadow-sm">
+                        ${generateOptions(supervisors, selectedSupervisorIdB, 'Aufsichtsperson 2')}
                     </select>
                 </td>
             `;
+            return row;
+        }
 
-            row.addEventListener("change", async (event) => {
+        // Function to populate the table with fetched exams data
+        function populateExams({ rooms, supervisors, exams }) {
+            const examList = document.getElementById("exam-list");
+
+            // Clear existing rows and populate new rows
+            const rows = exams.map(exam => createExamRow(exam, rooms, supervisors));
+            examList.innerHTML = "";
+            examList.append(...rows);
+
+            // Add event listener for updates to the exam selections
+            examList.addEventListener("change", async (event) => {
+                if (!event.target.matches('select')) return; // Ignore non-select elements
+
+                const examID = event.target.id.replace(/\D/g, ''); // Extract exam ID from element's ID
                 const roomID = document.getElementById(`RoomofExam${examID}`).value;
                 const supervisorAID = document.getElementById(`SupervisiorAofExam${examID}`).value;
                 const supervisorBID = document.getElementById(`SupervisiorBofExam${examID}`).value;
 
-                console.log(roomID, supervisorAID, supervisorBID);
+                const examData = {
+                    exams: [{
+                        id: examID,
+                        room_id: roomID || null,
+                        supervisors: [supervisorAID, supervisorBID].filter(id => id)
+                    }]
+                };
+
+                try {
+                    const response = await fetch('/api/exams', {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(examData)
+                    });
+
+                    const data = await response.json();
+                    if (response.ok) {
+                        console.log('Exam updated:', data);
+                    } else {
+                        console.error('Failed to update exam:', data.error);
+                    }
+                } catch (error) {
+                    console.error('Network error:', error);
+                }
             });
+        }
 
-            // Append the row to the table
-            examList.appendChild(row);
-        });
-    } catch (error) {
-        console.error("Error fetching data:", error);
-    }
-}
+        // Main function to fetch and populate the exams data
+        async function fetchAndPopulateExams() {
+            const loadingElement = document.getElementById("loading");
+            const errorElement = document.getElementById("error");
 
-// Helper: Format Date
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("de-DE"); // Format: DD.MM.YYYY
-}
+            try {
+                loadingElement.classList.add('hidden');
+                const { rooms, supervisors, exams } = examsData || await fetchData();
 
-// Call the function on page load
-fetchAndPopulateExams();
+                if (!examsData) {
+                    examsData = { rooms, supervisors, exams }; // Cache the data
+                }
 
+                populateExams({ rooms, supervisors, exams });
 
-</script>
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                errorElement.classList.remove('hidden');
+            }
+        }
 
+        // Call the main function on page load
+        fetchAndPopulateExams();
+    </script>
 </x-app-layout>
