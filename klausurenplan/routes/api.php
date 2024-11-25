@@ -26,4 +26,6 @@ Route::apiResource('rooms', RoomController::class);
 // Exam Routes
 Route::get('/exams', [ExamController::class, 'index']); // List all exams
 Route::get('/exams/{faculty}/{semester}', [ExamController::class, 'show']); // Show exams by faculty and semester
+Route::get('exams/options', [ExamController::class, 'getOptions']); // Get options for exams
 Route::put('/exams', [ExamController::class, 'update']); // Update exams
+

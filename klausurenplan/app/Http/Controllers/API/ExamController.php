@@ -186,4 +186,22 @@ class ExamController extends Controller
         $exams->delete();
         return response()->json(null, 204);
     }
+
+    public function getOptions()
+    {
+        try {
+            // Retrieve all faculties and semesters
+            $faculties = Faculty::all(['id', 'name']);
+            $semesters = Semester::all(['id', 'name']);
+
+            return response()->json([
+                'faculties' => $faculties,
+                'semesters' => $semesters
+            ], 200);
+        } catch (\Exception $e) {
+            Log::error("Failed to fetch options: " . $e->getMessage());
+            return response()->json(['error' => 'Failed to fetch options.'], 500);
+        }
+    }
 }
+
