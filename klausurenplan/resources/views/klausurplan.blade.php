@@ -6,30 +6,30 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="flex items-center mt-8">
-            <div class="mr-8">
-                <label for="faculty-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Fakultät
-                </label>
-                <select id="faculty-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                    <option value="" disabled selected>Fakultät auswählen</option>
-                    <!-- Populate dynamically -->
-                </select>
+        <div class="flex items-center mt-8 space-x-8">
+            <div>
+            <label for="faculty-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Fakultät
+            </label>
+            <select id="faculty-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                <option value="" disabled selected>Fakultät auswählen</option>
+                <!-- Populate dynamically -->
+            </select>
             </div>
             <div>
-                <label for="semester-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Semester
-                </label>
-                <select id="semester-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                    <option value="" disabled selected>Semester auswählen</option>
-                    <!-- Populate dynamically -->
-                </select>
+            <label for="semester-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Semester
+            </label>
+            <select id="semester-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                <option value="" disabled selected>Semester auswählen</option>
+                <!-- Populate dynamically -->
+            </select>
             </div>
+            <div id="loading" class="text-center mt-6">Einen Moment bitte!</div>
+            <div id="error" class="text-center mt-6 text-red-500 hidden">Irgendwas ist schiefgelaufen. Bitte versuche es später nochmal.</div>
         </div>
         <div class="mt-8">
             <div class="overflow-x-auto">
-                <div id="loading" class="text-center">Loading data...</div>
-                <div id="error" class="text-center text-red-500 hidden">There was an error loading the data. Please try again later.</div>
                 <table class="mt-3 w-full rounded-lg overflow-hidden">
                     <thead class="bg-gray-200 dark:bg-gray-800">
                         <tr>
