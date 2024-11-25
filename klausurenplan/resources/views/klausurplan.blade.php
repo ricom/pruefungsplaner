@@ -6,6 +6,26 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="flex items-center mt-8">
+            <div class="mr-8">
+                <label for="faculty-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Fakultät
+                </label>
+                <select id="faculty-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <option value="" disabled selected>Fakultät auswählen</option>
+                    <!-- Populate dynamically -->
+                </select>
+            </div>
+            <div>
+                <label for="semester-select" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Semester
+                </label>
+                <select id="semester-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <option value="" disabled selected>Semester auswählen</option>
+                    <!-- Populate dynamically -->
+                </select>
+            </div>
+        </div>
         <div class="mt-8">
             <div class="overflow-x-auto">
                 <div id="loading" class="text-center">Loading data...</div>
@@ -32,13 +52,41 @@
         // Caching the fetched data to prevent redundant API calls
         let examsData = null;
 
-        // Function to fetch all necessary data
-        async function fetchData() {
+        // Function to fetch dropdown options
+        async function fetchDropdownOptions() {
+            try {
+                const options = await (await fetch("/api/exams/options")).json();
+
+                const facultySelect = document.getElementById("faculty-select");
+                const semesterSelect = document.getElementById("semester-select");
+
+                // Preselect the first faculty
+                facultySelect.innerHTML = `
+                    ${options.faculties.map((faculty, index) => `
+                        <option value="${faculty.id}" ${index === 0 ? 'selected' : ''}>${faculty.name}</option>
+                    `).join("")}
+                `;
+
+                // Preselect the semester with the highest ID
+                const highestSemester = options.semesters.reduce((max, semester) => semester.id > max.id ? semester : max);
+                semesterSelect.innerHTML = `
+                    ${options.semesters.map(semester => `
+                        <option value="${semester.id}" ${semester.id === highestSemester.id ? 'selected' : ''}>${semester.name}</option>
+                    `).join("")}
+                `;
+            } catch (error) {
+                console.error("Failed to fetch dropdown options:", error);
+                throw error;
+            }
+        }
+
+        // Fetch data for rooms, supervisors, and exams based on selected faculty and semester
+        async function fetchData(faculty, semester) {
             try {
                 const [rooms, supervisors, exams] = await Promise.all([
                     fetch("/api/rooms").then(res => res.json()),
                     fetch("/api/supervisors").then(res => res.json()),
-                    fetch("/api/exams").then(res => res.json())
+                    (await fetch(`/api/exams/${faculty}/${semester}`)).json()
                 ]);
                 return { rooms, supervisors, exams };
             } catch (error) {
@@ -66,7 +114,7 @@
             `;
         }
 
-        // Function to create a table row for each exam
+        // Create a table row for each exam
         function createExamRow(exam, rooms, supervisors) {
             const row = document.createElement("tr");
             row.classList.add("border-b-2");
@@ -100,7 +148,8 @@
             return row;
         }
 
-        // Function to populate the table with fetched exams data
+        let examListChangeListenerAdded = false; // Flag to track if listener is added
+
         function populateExams({ rooms, supervisors, exams }) {
             const examList = document.getElementById("exam-list");
 
@@ -109,64 +158,86 @@
             examList.innerHTML = "";
             examList.append(...rows);
 
-            // Add event listener for updates to the exam selections
-            examList.addEventListener("change", async (event) => {
-                if (!event.target.matches('select')) return; // Ignore non-select elements
+            // Ensure only one change event listener is added to exam-list
+            if (!examListChangeListenerAdded) {
+                examList.addEventListener("change", async (event) => {
+                    if (!event.target.matches('select')) return; // Ignore non-select elements
 
-                const examID = event.target.id.replace(/\D/g, ''); // Extract exam ID from element's ID
-                const roomID = document.getElementById(`RoomofExam${examID}`).value;
-                const supervisorAID = document.getElementById(`SupervisiorAofExam${examID}`).value;
-                const supervisorBID = document.getElementById(`SupervisiorBofExam${examID}`).value;
+                    const examId = event.target.id.replace(/\D/g, ''); // Extract exam ID from element's ID
+                    const roomID = document.getElementById(`RoomofExam${examId}`).value;
+                    const supervisorAID = document.getElementById(`SupervisiorAofExam${examId}`).value;
+                    const supervisorBID = document.getElementById(`SupervisiorBofExam${examId}`).value;
 
-                const examData = {
-                    exams: [{
-                        id: examID,
-                        room_id: roomID || null,
-                        supervisors: [supervisorAID, supervisorBID].filter(id => id)
-                    }]
-                };
+                    const examData = {
+                        exams: [{
+                            id: examId,
+                            room_id: roomID || null,
+                            supervisors: [supervisorAID, supervisorBID].filter(id => id)
+                        }]
+                    };
 
-                try {
-                    const response = await fetch('/api/exams', {
-                        method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(examData)
-                    });
+                    try {
+                        const response = await fetch('/api/exams', {
+                            method: 'PUT',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(examData)
+                        });
 
-                    const data = await response.json();
-                    if (response.ok) {
-                        console.log('Exam updated:', data);
-                    } else {
-                        console.error('Failed to update exam:', data.error);
+                        const data = await response.json();
+                        if (response.ok) {
+                            console.log('Exam updated:', data);
+                        } else {
+                            console.error('Failed to update exam:', data.error);
+                        }
+                    } catch (error) {
+                        console.error('Network error:', error);
                     }
-                } catch (error) {
-                    console.error('Network error:', error);
-                }
-            });
-        }
+                });
 
-        // Main function to fetch and populate the exams data
-        async function fetchAndPopulateExams() {
-            const loadingElement = document.getElementById("loading");
-            const errorElement = document.getElementById("error");
-
-            try {
-                loadingElement.classList.add('hidden');
-                const { rooms, supervisors, exams } = examsData || await fetchData();
-
-                if (!examsData) {
-                    examsData = { rooms, supervisors, exams }; // Cache the data
-                }
-
-                populateExams({ rooms, supervisors, exams });
-
-            } catch (error) {
-                console.error("Error fetching data:", error);
-                errorElement.classList.remove('hidden');
+                examListChangeListenerAdded = true; // Set the flag to true
             }
         }
 
-        // Call the main function on page load
-        fetchAndPopulateExams();
+        // Fetch and populate exams when dropdowns change
+        async function fetchAndPopulateExams() {
+            const loadingElement = document.getElementById("loading");
+            const errorElement = document.getElementById("error");
+            const faculty = document.getElementById("faculty-select").value;
+            const semester = document.getElementById("semester-select").value;
+
+            try {
+                loadingElement.classList.remove("hidden");
+                errorElement.classList.add("hidden");
+
+                if (!faculty || !semester) {
+                    throw new Error("Please select both faculty and semester.");
+                }
+
+                const { rooms, supervisors, exams } = await fetchData(faculty, semester);
+                populateExams({ rooms, supervisors, exams });
+                loadingElement.classList.add("hidden");
+            } catch (error) {
+                errorElement.classList.remove("hidden");
+                loadingElement.classList.add("hidden");
+                console.error("Error fetching data:", error);
+            }
+        }
+
+        // Initialize page
+        async function initializePage() {
+            try {
+                await fetchDropdownOptions();
+                await fetchAndPopulateExams();
+            } catch (error) {
+                console.error("Error during initialization:", error);
+            }
+        }
+
+        // Event listeners for dropdown changes
+        document.getElementById("faculty-select").addEventListener("change", fetchAndPopulateExams);
+        document.getElementById("semester-select").addEventListener("change", fetchAndPopulateExams);
+
+        // Initialize on page load
+        document.addEventListener("DOMContentLoaded", initializePage);
     </script>
 </x-app-layout>
