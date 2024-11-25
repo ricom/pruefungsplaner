@@ -34,6 +34,7 @@
                     <thead class="bg-gray-200 dark:bg-gray-800">
                         <tr>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Datum</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Uhrzeit</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Klausur</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Raum</th>
                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">Aufsichtsperson 1</th>
@@ -101,6 +102,10 @@
             return date.toLocaleDateString("de-DE"); // Format: DD.MM.YYYY
         }
 
+        function formatTime(timeString) {
+            return timeString.slice(0, 5); // Format: HH:MM
+        }
+
         // Function to generate options for room and supervisor selects
         function generateOptions(options, selectedId, type = 'Room') {
             const placeholder = `${type} auswählen`;
@@ -125,6 +130,7 @@
 
             row.innerHTML = `
                 <td class="px-6 py-4 whitespace-nowrap">${formatDate(exam.date)}</td>
+                <td class="px-6 py-4 whitespace-nowrap">${formatTime(exam.start_time)}<br>${formatTime(exam.end_time)}</td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     <b>${exam.degree?.name || 'No Degree'}</b><br>
                     ${exam.lecturer?.name || 'No Lecturer'}
