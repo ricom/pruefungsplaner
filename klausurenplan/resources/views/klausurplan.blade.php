@@ -58,6 +58,11 @@
         // Caching the fetched data to prevent redundant API calls
         let examsData = null;
 
+        // Print button functionality
+        document.getElementById("print-button").addEventListener("click", () => {
+            window.print();
+        });
+
         // Function to fetch dropdown options
         async function fetchDropdownOptions() {
             try {
@@ -250,10 +255,5 @@
 
         // Initialize on page load
         document.addEventListener("DOMContentLoaded", initializePage);
-
-        // Print button functionality
-        document.getElementById("print-button").addEventListener("click", () => {
-            window.print();
-        });
     </script>
 </x-app-layout>
