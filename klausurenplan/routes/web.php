@@ -4,7 +4,11 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// Redirect '/' to '/klausurplan'
 Route::redirect('/', '/klausurplan');
+
+// Redirect '/dashboard' to '/klausurplan'
+Route::redirect('/dashboard', '/klausurplan');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/klausurplan', 'klausurplan')->name('klausurplan');
