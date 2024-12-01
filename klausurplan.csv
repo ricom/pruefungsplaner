@@ -1,0 +1,11 @@
+Kursnummer,Kursname,Dozent Name,Prüfungsdatum,Prüfungsbeginn,Prüfungsende,Prüfungsformat,Studiengang, Fakultät
+CS101,Einführung in die Informatik,Dr. John Doe,2024-12-15,09:00,12:00,Online,Bachelor in Informatik,Fakultät für Informatik
+CS102,Datenstrukturen,Prof. Jane Smith,2024-12-16,14:00,17:00,Schriftlich,Bachelor in Informatik,Fakultät für Informatik
+MATH201,Fortgeschrittene Mathematik,Dr. Alan Turing,2024-12-17,10:00,13:00,Praktisch,Master in Mathematik,Fakultät für Mathematik
+PHYS201,Einführung in die Physik,Prof. Hans Müller,2024-12-18,08:00,11:00,Online,Bachelor in Physik,Fakultät für Physik
+BIO202,Biochemie,Dr. Maria Schmidt,2024-12-19,15:00,18:00,Schriftlich,Bachelor in Biologie,Fakultät für Biologie
+CHEM301,Organische Chemie,Prof. Karl Becker,2024-12-20,09:00,12:00,Praktisch,Master in Chemie,Fakultät für Chemie
+ENG201,Englische Literatur,Dr. Eva Fischer,2024-12-21,11:00,14:00,Online,Bachelor in Englisch,Fakultät für Geisteswissenschaften
+HIST202,Europäische Geschichte,Prof. Thomas Weber,2024-12-22,13:00,16:00,Schriftlich,Bachelor in Geschichte,Fakultät für Geschichte
+ECON301,Grundlagen der Wirtschaft,Dr. Michael Braun,2024-12-23,10:00,13:00,Praktisch,Master in Wirtschaft,Fakultät für Wirtschaft
+PSY202,Einführung in die Psychologie,Prof. Laura Schmitz,2024-12-24,14:00,17:00,Online,Bachelor in Psychologie,Fakultät für Psychologie
